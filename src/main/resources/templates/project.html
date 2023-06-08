@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${project.name}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark bg-light rounded" th:text="${project.name}"></h2>
+            </div>
+            <div class="block-content">
+                <div class="product-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="carouselExample" class="carousel slide">
+                                <div class="carousel-inner">
+                                    <div  class="carousel-item active">
+                                        <img th:src="'/img/' + ${project.photos[0]}" class="d-block w-100">
+                                    </div>
+                                    <div th:each="p : ${project.photosAfter()}" class="carousel-item">
+                                        <img th:src="'/img/' + ${p}" class="d-block w-100">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                                        data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info">
+                                <h3 style="font-weight: bold;">Собираемая сумма: <span th:text="${project.price}"></span>
+                                </h3>
+                                <div th:if="${project.owner.id == user.id}" class="summary mb-3">
+                                    <a th:href="'/projects/edit/' + ${project.id}" class="btn btn-success" type="button"
+                                       style="margin-right: 15px;">Редактировать</a>
+                                    <a th:href="'/projects/delete/' + ${project.id}" class="btn btn-danger" type="button">Удалить</a>
+                                </div>
+                                <div class="summary">
+                                    <form method="post" th:action="'/projects/rent/' + ${project.id}">
+                                        <div class="row">
+                                            <div class="col-xl-8">
+                                                <input class="form-control form-control-lg" type="number" name="invested"
+                                                       min="1" step="1" placeholder="Сумма"></div>
+                                            <div class="col-xl-4">
+                                                <button class="btn btn-primary" type="submit">Задонатить</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="summary">
+                                    <p th:text="${project.description.description}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="stat">Сфера проекта</td>
+                                <td th:text="${project.description.scope.name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Собранная сумма</td>
+                                <td th:text="${project.description.collected}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Тип проекта</td>
+                                <td th:text="${project.description.type.name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="stat">Количество инвесторов</td>
+                                <td th:text="${project.description.quantity}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

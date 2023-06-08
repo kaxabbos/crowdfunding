@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>О нас</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading">
+                    <h2 class="text-dark bg-light rounded">О нас</h2>
+            </div>
+            <div class="block-content">
+                <div class="row">
+                    <div class="col-12" align="justify"><p class="lead">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Aspernatur assumenda eaque error exercitationem iusto laborum nisi obcaecati,
+                        perspiciatis quae quas quod, similique, tenetur vero? Ab deserunt explicabo sit vel vero?</p>
+                    </div>
+                    <div class="col-12" align="center">
+                        <iframe width="75%" height="550" src="https://www.youtube.com/embed/g5mb_qUnV54"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="col-12" align="justify"><p class="lead">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Ad adipisci delectus enim excepturi fugit, illum impedit ipsa ipsam nihil
+                        nobis nostrum numquam placeat qui ratione reprehenderit similique tenetur veritatis, vitae.</p>
+                    </div>
+                    <div class="col-12" align="justify"><p class="lead">Lorem ipsum dolor sit amet, consectetur
+                        adipisicing elit. Aut blanditiis eaque est expedita inventore nulla obcaecati recusandae sit. At
+                        consequatur ea laudantium magni mollitia nulla placeat quis sit. Atque, consequatur.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

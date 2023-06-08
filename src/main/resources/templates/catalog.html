@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Представляемые проекты</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page">
+    <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark bg-light rounded">Представляемые проекты</h2>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <form method="post" action="/search">
+                            <div class="filters" style="padding-left: 20px;padding-top: 15px;">
+                                <div class="filter-item">
+                                    <h3>Сфера проекта</h3>
+                                    <select class="form-select" name="scope">
+                                        <option th:each="b : ${scopes}" th:value="${b}" th:label="${b.name}"
+                                                th:selected="${b == bSelect}"></option>
+                                    </select>
+                                </div>
+                                <div class="filter-item">
+                                    <h3>Тип проекта</h3>
+                                    <select class="form-select" name="type">
+                                        <option th:each="f : ${types}" th:value="${f}" th:label="${f.name}"
+                                                th:selected="${f == fSelect}"></option>
+                                    </select>
+                                </div>
+                                <div class="filter-item">
+                                    <button class="btn btn-primary" type="submit" style="margin-right: 10px;">Найти
+                                    </button>
+                                    <a class="btn btn-secondary" role="button" href="/">Сбросить</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="products">
+                            <div class="row g-0">
+                                <div th:each="c : ${projects}" class="col-12 col-md-6 col-lg-4">
+                                    <div class="clean-product-item">
+                                        <div class="image">
+                                            <a th:href="'/projects/' + ${c.id}">
+                                                <img class="img-fluid d-block mx-auto"
+                                                     th:src="'/img/' + ${c.photos[0]}">
+                                            </a>
+                                        </div>
+                                        <p class="lead" align="center">
+                                            <a th:href="'/projects/' + ${c.id}" th:text="${c.name}"></a>
+                                        </p>
+                                        <p>Собираемая сумма: <span th:text="${c.price}"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

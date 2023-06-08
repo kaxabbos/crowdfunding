@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Добавить</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark bg-light rounded">Добавить</h2>
+            </div>
+            <div class="block-content">
+                <form action="/projects/add" method="post" enctype="multipart/form-data">
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col-6 mb-2">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Название проекта</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required="" name="name"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Собираемая сумма</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1"
+                                                        step="1" required="" name="price"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Сфера проекта</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="scope">
+                                        <option th:each="b : ${scopes}" th:value="${b}"
+                                                th:label="${b.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Собранная сумма</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1"
+                                                        step="1" required="" name="collected"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Тип проекта</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="type">
+                                        <option th:each="f : ${types}" th:value="${f}" th:label="${f.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Количество инвесторов</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" value="1" min="1"
+                                                        step="1" required="" name="quantity"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Фотография</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="file" multiple="" required=""
+                                                        accept="image/*" name="photos"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row d-xl-flex">
+                                <div class="col-xl-4 d-xl-flex">
+                                    <p>Описание</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required="" name="description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" style="margin-right: 15px;">Добавить</button>
+                            <button class="btn btn-secondary" type="reset">Очистить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>

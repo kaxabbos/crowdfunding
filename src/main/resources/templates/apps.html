@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Заявки</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page">
+    <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark bg-light rounded">Заявки</h2>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div th:each="c : ${projects}" class="col-3">
+                        <div class="clean-product-item">
+                            <div class="image">
+                                <a th:href="'/projects/' + ${c.id}">
+                                    <img class="img-fluid d-block mx-auto"
+                                         th:src="'/img/' + ${c.photos[0]}">
+                                </a>
+                            </div>
+                            <p class="lead" align="center">
+                                <a th:href="'/projects/' + ${c.id}" th:text="${c.name}"></a>
+                            </p>
+                            <p>Собираемая сумма: <span th:text="${c.price}"></span></p>
+                            <p>Статус: <span th:text="${c.status.name}"></span></p>
+                            <a th:href="'/apps/active/' + ${c.id}" class="btn btn-primary w-100 mb-2">Подтвердить</a>
+                            <a th:href="'/apps/reject/' + ${c.id}" class="btn btn-primary w-100 mb-2">Отказать</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Статистика</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100" style="background: url(&quot;/img/bg.jpg&quot;) top / cover;">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark bg-light rounded">Статистика</h2>
+            </div>
+            <div class="block-content">
+                <div hidden>
+                    <span id="investsName0" th:text="${investsName[0]}"></span>
+                    <span id="investsName1" th:text="${investsName[1]}"></span>
+                    <span id="investsName2" th:text="${investsName[2]}"></span>
+                    <span id="investsName3" th:text="${investsName[3]}"></span>
+                    <span id="investsName4" th:text="${investsName[4]}"></span>
+                    <span id="invests0" th:text="${invests[0]}"></span>
+                    <span id="invests1" th:text="${invests[1]}"></span>
+                    <span id="invests2" th:text="${invests[2]}"></span>
+                    <span id="invests3" th:text="${invests[3]}"></span>
+                    <span id="invests4" th:text="${invests[4]}"></span>
+                </div>
+                <div id="topPrice" style="width: 100%; height: 500px;"></div>
+                <hr>
+                <div class="row d-xl-flex" style="margin-bottom: 15px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Название проекта</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Собираемая сумма</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Собранная сумма</h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4>Инвестировали</h4>
+                    </div>
+                </div>
+                <div th:each="s : ${stats}" class="row d-xl-flex" style="margin-bottom: 15px;">
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.project.name}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.project.price}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.project.description.collected}"></h4>
+                    </div>
+                    <div class="col d-xl-flex justify-content-xl-center">
+                        <h4 th:text="${s.invested}"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ["corechart"]});
+    google.charts.setOnLoadCallback(drawTopPrice);
+
+    function drawTopPrice() {
+        var investsName0 = document.querySelector('#investsName0').textContent;
+        var investsName1 = document.querySelector('#investsName1').textContent;
+        var investsName2 = document.querySelector('#investsName2').textContent;
+        var investsName3 = document.querySelector('#investsName3').textContent;
+        var investsName4 = document.querySelector('#investsName4').textContent;
+        var invests0 = parseInt(document.querySelector('#invests0').textContent);
+        var invests1 = parseInt(document.querySelector('#invests1').textContent);
+        var invests2 = parseInt(document.querySelector('#invests2').textContent);
+        var invests3 = parseInt(document.querySelector('#invests3').textContent);
+        var invests4 = parseInt(document.querySelector('#invests4').textContent);
+        var data = google.visualization.arrayToDataTable([
+            ['Название', 'Инвестировано', {role: 'style'}, {role: 'annotation'}],
+            [investsName0, invests0, "red", invests0],
+            [investsName1, invests1, "brown", invests1],
+            [investsName2, invests2, "green", invests2],
+            [investsName3, invests3, "blue", invests3],
+            [investsName4, invests4, "purple", invests4],
+        ]);
+
+
+        var options = {
+            title: 'Топ-5 инвестиций',
+            hAxis: {title: 'Название'},
+            vAxis: {title: 'Инвестировано'},
+            bar: {groupWidth: "80%"},
+            legend: {position: "none"}
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('topPrice'));
+        chart.draw(data, options);
+    }
+</script>
+
+<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<script src="/js/vanilla-zoom.js"></script>
+<script src="/js/theme.js"></script>
+</body>
+
+</html>
